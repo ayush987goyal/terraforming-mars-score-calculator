@@ -21,6 +21,9 @@ export interface AwardSlotState {
   secondPlace: string[]; // player IDs
 }
 
+export type OfficialPlayerColorName = 'Red' | 'Blue' | 'Green' | 'Yellow' | 'Charcoal';
+export type OfficialPlayerColor = '#e74c3c' | '#3498db' | '#2ecc71' | '#f1c40f' | '#34495e';
+
 export interface Player {
   id: string;
   name: string;

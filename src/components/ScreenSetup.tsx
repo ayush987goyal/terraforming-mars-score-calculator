@@ -1,19 +1,9 @@
 import React from 'react';
 import { GameState, BoardType, Player } from '../types';
-import { CORPORATIONS } from '../data/gameData';
+import { CORPORATIONS, COLOR_PALETTE } from '../data/gameData';
 import { ArrowRight, ShieldCheck, Layers, Users, Check } from 'lucide-react';
 import { triggerHaptic } from '../utils/haptics';
 import { PlayerBadge, isCharcoalOrDark } from './PlayerBadge';
-
-const COLOR_PALETTE = [
-  { name: 'Red', hex: '#e74c3c' },
-  { name: 'Blue', hex: '#3498db' },
-  { name: 'Green', hex: '#2ecc71' },
-  { name: 'Yellow', hex: '#f1c40f' },
-  { name: 'Charcoal', hex: '#34495e' },
-  { name: 'Purple', hex: '#9b59b6' },
-  { name: 'Orange', hex: '#e67e22' }
-];
 
 interface ScreenSetupProps {
   gameState: GameState;
@@ -47,15 +37,15 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
             <span className="text-xs font-bold uppercase tracking-wider text-[#e2583e] bg-[#e2583e]/15 px-2.5 py-1 rounded-full border border-[#e2583e]/30">
               Screen 1 of 3
             </span>
-            <span className="text-xs text-slate-300 font-medium">Match Configuration</span>
+            <span className="text-xs text-slate-300 font-medium">Setup</span>
           </div>
         </div>
 
         <h2 className="font-orbitron text-2xl sm:text-3xl font-extrabold text-white tracking-wide">
-          Tabletop Match Setup
+          Match Setup
         </h2>
         <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-          Configure player count, player colors, board map, and active expansions. Then follow the guided walkthrough category-by-category.
+          Set player count, colors, board map, and active expansions.
         </p>
 
         {/* 1. Minimalist Player Count Selector (44px+ Hit Targets) */}
@@ -65,7 +55,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
               <Users className="w-4 h-4 text-[#e2583e]" />
               <span>Player Count</span>
             </label>
-            <span className="text-xs text-slate-300 font-semibold">{numPlayers} Players Selected</span>
+            <span className="text-xs text-slate-300 font-semibold">{numPlayers} Players</span>
           </div>
 
           <div className="grid grid-cols-5 gap-2 sm:gap-3 bg-[#101420] p-1.5 rounded-xl border border-[#232a3d]">
@@ -79,16 +69,13 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
                     triggerHaptic(10);
                     onSetPlayerCount(cnt);
                   }}
-                  className={`min-h-[48px] py-2.5 sm:py-3 rounded-lg font-orbitron font-bold text-sm sm:text-base transition cursor-pointer flex flex-col items-center justify-center gap-0.5 ${
+                  className={`min-h-[48px] py-2.5 sm:py-3 rounded-lg font-orbitron font-extrabold text-base sm:text-lg transition cursor-pointer flex items-center justify-center ${
                     isSelected
                       ? 'bg-gradient-to-r from-[#e2583e] to-[#f39c12] text-white shadow-lg shadow-[#e2583e]/30 scale-[1.02]'
                       : 'text-slate-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <span>{cnt}</span>
-                  <span className="text-[10px] uppercase tracking-wider font-semibold opacity-90">
-                    {cnt === 1 ? 'Solo' : 'Players'}
-                  </span>
+                  {cnt}
                 </button>
               );
             })}
@@ -102,7 +89,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
           <h3 className="font-rajdhani text-lg font-bold text-white uppercase tracking-wider flex items-center gap-2">
             <span>👥</span> Players & Corporations
           </h3>
-          <span className="text-xs text-slate-300">Tap inline color pill to change</span>
+          <span className="text-xs text-slate-300">Tap color to change</span>
         </div>
 
         <div className="space-y-4">
@@ -120,7 +107,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
 
                   <div className="flex-1 min-w-0">
                     <label className="text-xs uppercase font-bold text-slate-300 block mb-0.5">
-                      Player {idx + 1} Name
+                      Name
                     </label>
                     <input
                       type="text"
@@ -153,7 +140,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
 
               {/* Bottom Row: Inline 36px Touchable Color Pills */}
               <div className="pt-2 border-t border-[#232a3d] flex flex-wrap items-center gap-2">
-                <span className="text-xs font-semibold text-slate-300 mr-1">Player Color:</span>
+                <span className="text-xs font-semibold text-slate-300 mr-1">Color:</span>
                 <div className="flex flex-wrap items-center gap-2">
                   {COLOR_PALETTE.map((c) => {
                     const isSelected = p.color.toLowerCase() === c.hex.toLowerCase();
@@ -263,7 +250,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>Expansions</span>
             </h3>
-            <span className="text-xs text-slate-300">Toggle modules</span>
+            <span className="text-xs text-slate-300">Optional</span>
           </div>
 
           <div className="space-y-2.5">
@@ -291,7 +278,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
                     )}
                   </div>
                   <p className="text-xs text-slate-300">
-                    Scores Chairman (1 VP) and Party Leader seats (1 VP each)
+                    Chairman & Party Leaders (1 VP each)
                   </p>
                 </div>
               </div>
@@ -327,7 +314,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
                     )}
                   </div>
                   <p className="text-xs text-slate-300">
-                    Adds Hoverlord milestone and Venuphile award
+                    Adds Hoverlord & Venuphile
                   </p>
                 </div>
               </div>
@@ -347,7 +334,7 @@ export const ScreenSetup: React.FC<ScreenSetupProps> = ({
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
           <div className="hidden sm:block">
             <div className="text-xs font-bold text-white uppercase tracking-wider">
-              Ready to Score?
+              Ready to Score
             </div>
             <div className="text-xs text-slate-300">
               {numPlayers} Players • {boardMilestones.toUpperCase()} Map

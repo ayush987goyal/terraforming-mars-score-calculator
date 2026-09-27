@@ -31,7 +31,7 @@ flowchart LR
 
 ### 1. Minimal Match Setup
 - **Player Scaling (1–5 Players)**: Instant selector dynamically configures player rows.
-- **Player Profiles**: Customize names, select from 36 official corporations (Base, Prelude, Venus Next, Colonies, Turmoil), and pick distinctive player token colors (Red, Blue, Green, Yellow, Charcoal, Purple, Orange).
+- **Player Profiles**: Customize names, select from 36 official corporations (Base, Prelude, Venus Next, Colonies, Turmoil), and pick distinctive player token colors (Red, Blue, Green, Yellow, Charcoal/Black).
 - **Map Board Selection**: Choose between **Tharsis (Standard)**, **Hellas**, and **Elysium**, auto-populating official Milestone & Award rosters.
 - **Expansion Modules**: Toggle **Venus Next** (adds Hoverlord milestone and Venuphile award) and **Turmoil** (adds Chairman & Party Leader VP).
 

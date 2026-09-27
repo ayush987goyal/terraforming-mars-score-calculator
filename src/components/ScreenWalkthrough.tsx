@@ -196,7 +196,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
           <span className="font-bold uppercase tracking-wider text-[#e2583e]">
             Category {currentStep} of 4
           </span>
-          <span className="italic">Scores remain veiled until podium reveal</span>
+          <span className="italic">Scores veiled until reveal</span>
         </div>
 
         {/* Step Tabs Grid (44px+ Min Hit Targets) */}
@@ -252,20 +252,16 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
       {currentStep === 1 && (
         <div className="space-y-4 animate-in fade-in duration-200">
           <div className="bg-[#141824] border border-[#2b354d] rounded-2xl p-5 shadow-xl">
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3">
               <span className="text-2xl">🌐</span>
               <div>
                 <h3 className="font-orbitron text-xl font-bold text-white tracking-wide">
                   Step 1: Final Terraform Rating (TR)
                 </h3>
                 <p className="text-xs text-slate-300">
-                  Record each player's final position on the TR track. Each 1 TR awards 1 Victory Point (starts at 20).
+                  1 VP per TR (starts at 20). Tap any number for keypad.
                 </p>
               </div>
-            </div>
-            <div className="mt-3 py-2 px-3 rounded-lg bg-sky-950/30 border border-sky-500/30 text-xs text-sky-300 flex items-center gap-2">
-              <span>💡</span>
-              <span>Tap any number box to open the full numeric keypad with <b>Set & Next Player</b>, or use +/- for quick adjustment.</span>
             </div>
           </div>
 
@@ -321,7 +317,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                   Step 2: Milestones & Funded Awards
                 </h3>
                 <p className="text-xs text-slate-300">
-                  Milestones award 5 VP each (max 3 claimed game-wide). Funded awards grant 5 VP for 1st place and 2 VP for 2nd place.
+                  Milestones: 5 VP each (max 3). Awards: 1st (5 VP), 2nd (2 VP).
                 </p>
               </div>
             </div>
@@ -335,7 +331,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                   <span>🚩</span> Claimed Milestones (5 VP Each)
                 </h4>
                 <p className="text-xs text-slate-300">
-                  Tap player pill to claim (max 3 claimed across all players).
+                  Max 3 claimed across all players.
                 </p>
               </div>
               <div
@@ -431,7 +427,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                   <span>🎖️</span> Funded Awards
                 </h4>
                 <p className="text-xs text-slate-300">
-                  1st place = 5 VP, 2nd place = 2 VP. (2-player: 0 VP for 2nd; 1st tie gives 5 VP each and cancels 2nd).
+                  1st = 5 VP, 2nd = 2 VP (2-player: 0 VP for 2nd).
                 </p>
               </div>
               <div
@@ -603,7 +599,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                   Step 3: Board Greeneries & Cities
                 </h3>
                 <p className="text-xs text-slate-300">
-                  1 VP per owned greenery tile. Cities score 1 VP per adjacent greenery tile (owned by anyone). Tap numbers for keypad with <b>Set & Next Player</b>.
+                  1 VP per owned greenery. Cities score 1 VP per adjacent greenery.
                 </p>
               </div>
             </div>
@@ -681,7 +677,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                     >
                       <span className="flex items-center gap-2">
                         <span>🌟</span>
-                        <span>Special Tiles (Capital & Commercial District)</span>
+                        <span>Special Tiles (Capital & Commercial)</span>
                         {(p.hasCapital || p.hasCommercialDistrict) && (
                           <span className="text-xs font-bold text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded">
                             Active
@@ -805,7 +801,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                   Step 4: Cards VP & Turmoil
                 </h3>
                 <p className="text-xs text-slate-300">
-                  Sum of project card Victory Points (fixed + resource + Jovian multipliers). If Turmoil is active, score Chairman and Party Leaders. Enter final MegaCredits (M€ cash) for tiebreaker.
+                  Cards VP and tiebreaker cash (M€). Chairman & Leaders if Turmoil active.
                 </p>
               </div>
             </div>
@@ -884,7 +880,7 @@ export const ScreenWalkthrough: React.FC<ScreenWalkthroughProps> = ({
                     >
                       <span className="flex items-center gap-2">
                         <Calculator className="w-4 h-4" />
-                        <span>Optional Card VP Breakdown Helper (Fixed / Bio / Jovian)</span>
+                        <span>Card VP Helper (Fixed / Bio / Jovian)</span>
                       </span>
                       {hasCardCalc ? (
                         <ChevronDown className="w-4 h-4" />

@@ -29,16 +29,11 @@ export const Header: React.FC<HeaderProps> = ({
             🪐
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="font-orbitron text-lg sm:text-xl font-extrabold tracking-wider text-white uppercase drop-shadow">
-                Terraforming Mars
-              </h1>
-              <span className="text-xs font-bold tracking-wider uppercase bg-[#e2583e]/20 text-[#ff8c73] px-2.5 py-0.5 rounded-full border border-[#e2583e]/40">
-                Guided Scorer
-              </span>
-            </div>
+            <h1 className="font-orbitron text-lg sm:text-xl font-extrabold tracking-wider text-white uppercase drop-shadow">
+              Terraforming Mars
+            </h1>
             <p className="text-xs text-slate-300 font-medium">
-              Tabletop End-Game Score Calculator • PWA Offline Ready
+              Tabletop End-Game Score Calculator • Offline Ready
             </p>
           </div>
         </div>

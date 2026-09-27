@@ -103,10 +103,10 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
       <div className="bg-[#141824] border border-[#2b354d] rounded-2xl p-5 sm:p-6 shadow-xl">
         <div className="text-center mb-6">
           <h3 className="font-orbitron text-lg font-bold text-white uppercase tracking-wider flex items-center justify-center gap-2">
-            <span>🎖️</span> Official Post-Game Podium
+            <span>🎖️</span> Final Podium
           </h3>
           <p className="text-xs text-slate-300 mt-0.5">
-            Final standings with cash tiebreaker resolution
+            Final standings & tiebreaker cash
           </p>
         </div>
 
@@ -303,7 +303,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
           >
             <span className="flex items-center gap-2">
               <Award className="w-4 h-4 text-sky-400" />
-              <span>Full Point Breakdown & Category Details</span>
+              <span>Point Breakdown & Category Details</span>
             </span>
             {breakdownOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>

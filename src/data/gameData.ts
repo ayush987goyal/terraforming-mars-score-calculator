@@ -80,6 +80,14 @@ export const VENUS_AWARD: AwardDefinition = {
   desc: "Most Venus tags in play"
 };
 
+export const COLOR_PALETTE = [
+  { name: 'Red', hex: '#e74c3c' },
+  { name: 'Blue', hex: '#3498db' },
+  { name: 'Green', hex: '#2ecc71' },
+  { name: 'Yellow', hex: '#f1c40f' },
+  { name: 'Charcoal', hex: '#34495e' }
+] as const;
+
 export const DEFAULT_PLAYERS: Player[] = [
   {
     id: "p1",
@@ -152,7 +160,7 @@ export const DEFAULT_PLAYERS: Player[] = [
   {
     id: "p5",
     name: "Player 5",
-    color: "#7f8c8d",
+    color: "#34495e",
     corporation: "Mining Guild",
     tr: 20,
     greeneries: 0,

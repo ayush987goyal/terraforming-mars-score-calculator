@@ -4,7 +4,8 @@ import {
   getInitialGameState,
   BOARD_DATA,
   VENUS_MILESTONE,
-  DEFAULT_PLAYERS
+  DEFAULT_PLAYERS,
+  COLOR_PALETTE
 } from './data/gameData';
 import { calculateScores, generateMatchReport } from './utils/scoring';
 import { Header } from './components/Header';
@@ -24,7 +25,15 @@ export const App: React.FC = () => {
     try {
       const saved = localStorage.getItem(STATE_STORAGE_KEY);
       if (saved) {
-        return JSON.parse(saved);
+        const parsed: GameState = JSON.parse(saved);
+        const validHexes = COLOR_PALETTE.map((c) => c.hex.toLowerCase());
+        parsed.players = (parsed.players || []).map((p, idx) => {
+          if (!p.color || !validHexes.includes(p.color.toLowerCase())) {
+            return { ...p, color: COLOR_PALETTE[idx % COLOR_PALETTE.length].hex };
+          }
+          return p;
+        });
+        return parsed;
       }
     } catch (e) {
       console.error('Failed to load saved state:', e);
