@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-space: #0c0e14;
+    --bg-surface: #141824;
+    --bg-card: #1b2132;
+    --bg-card-hover: #21293e;
+    --bg-input: #101420;
+    --border-color: #2b354d;
+    --border-focus: #e2583e;
+
+    --mars-red: #e2583e;
+    --mars-red-glow: rgba(226, 88, 62, 0.35);
+    --mars-rust: #c0392b;
+    --mars-gold: #f39c12;
+    --mars-copper: #d35400;
+    --vp-gold: #f1c40f;
+    --vp-gold-glow: rgba(241, 196, 15, 0.4);
+
+    --color-greenery: #2ecc71;
+    --color-ocean: #3498db;
+    --color-city: #95a5a6;
+    --color-card: #9b59b6;
+    --color-turmoil: #e67e22;
+
+    --text-main: #f0f3f8;
+    --text-muted: #8c9bb3;
+    --text-dark: #12151e;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-space);
+    background-image: 
+      radial-gradient(circle at 15% 10%, rgba(226, 88, 62, 0.12), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(52, 152, 219, 0.08), transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(243, 156, 18, 0.04), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    line-height: 1.5;
+  }
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', 'Rajdhani', sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+/* Custom Scrollbar for game cards & modal lists */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #101420;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b354d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e2583e;
+}

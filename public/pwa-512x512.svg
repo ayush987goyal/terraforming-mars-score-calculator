@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="marsGrad512" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff8c69"/>
+      <stop offset="45%" stop-color="#e2583e"/>
+      <stop offset="85%" stop-color="#a82315"/>
+      <stop offset="100%" stop-color="#4a0f08"/>
+    </radialGradient>
+    <radialGradient id="glowGrad512" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="#e2583e" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#e2583e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur512">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0c0e14"/>
+  <circle cx="256" cy="256" r="230" fill="url(#glowGrad512)" filter="url(#blur512)"/>
+  <circle cx="256" cy="256" r="185" fill="url(#marsGrad512)"/>
+  <ellipse cx="205" cy="195" rx="42" ry="26" fill="#8c1b0f" opacity="0.5"/>
+  <ellipse cx="315" cy="245" rx="32" ry="22" fill="#6d140a" opacity="0.6"/>
+  <ellipse cx="240" cy="335" rx="48" ry="30" fill="#580f07" opacity="0.6"/>
+  <ellipse cx="175" cy="290" rx="22" ry="14" fill="#8c1b0f" opacity="0.4"/>
+  <!-- Orbital rings -->
+  <ellipse cx="256" cy="256" rx="220" ry="64" fill="none" stroke="#f1c40f" stroke-width="8" opacity="0.75" transform="rotate(-25 256 256)"/>
+</svg>
