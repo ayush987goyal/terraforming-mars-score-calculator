@@ -5,15 +5,7 @@ import './index.css';
 import { registerSW } from 'virtual:pwa-register';
 
 // Register Service Worker for offline PWA support
-registerSW({
-  immediate: true,
-  onNeedRefresh() {
-    console.log('[PWA] New content available.');
-  },
-  onOfflineReady() {
-    console.log('[PWA] App is ready for offline usage at the table.');
-  }
-});
+registerSW({ immediate: true });
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
