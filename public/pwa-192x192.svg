@@ -1,110 +1,97 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Outer Atmospheric Glow -->
-    <radialGradient id="marsOuterGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="76%" stop-color="#ff5722" stop-opacity="0.4"/>
-      <stop offset="88%" stop-color="#e64a19" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#d84315" stop-opacity="0"/>
+    <!-- Outer Atmospheric Halo Glow -->
+    <radialGradient id="marsOuterHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="68%" stop-color="#ff7043" stop-opacity="0.45"/>
+      <stop offset="84%" stop-color="#ff5722" stop-opacity="0.25"/>
+      <stop offset="94%" stop-color="#38bdf8" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Planet Spherical Gradient (Light from Top-Left, 3D Sphere) -->
-    <radialGradient id="marsSphere" cx="35%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#ffa07a"/>
-      <stop offset="18%" stop-color="#ff6e40"/>
-      <stop offset="45%" stop-color="#e64a19"/>
-      <stop offset="72%" stop-color="#c0392b"/>
-      <stop offset="88%" stop-color="#871c10"/>
-      <stop offset="100%" stop-color="#3d0a06"/>
+    <!-- Daylight Spherical Mars (Fiery terracotta to rich rust orange across entire disc) -->
+    <radialGradient id="marsDaylight" cx="38%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#ffa270"/>
+      <stop offset="22%" stop-color="#ff7043"/>
+      <stop offset="55%" stop-color="#ff5722"/>
+      <stop offset="82%" stop-color="#e64a19"/>
+      <stop offset="100%" stop-color="#d84315"/>
     </radialGradient>
 
-    <!-- Limb / Atmospheric Rim Glow (Warm terracotta-gold into delicate thin cyan) -->
-    <linearGradient id="marsLimb" x1="15%" y1="10%" x2="85%" y2="90%">
-      <stop offset="0%" stop-color="#ffe082" stop-opacity="0.9"/>
-      <stop offset="25%" stop-color="#ff8a65" stop-opacity="0.75"/>
-      <stop offset="70%" stop-color="#38bdf8" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2"/>
+    <!-- Sunlit Atmospheric Halo Rim (Amber/Gold to Radiant Cyan) -->
+    <linearGradient id="marsAtmosphereRim" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#ffe082"/>
+      <stop offset="35%" stop-color="#ff8a65"/>
+      <stop offset="70%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#80deea"/>
     </linearGradient>
 
     <!-- Polar Ice Cap Gradient -->
-    <linearGradient id="iceCapGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
-      <stop offset="45%" stop-color="#f0f9ff" stop-opacity="0.9"/>
-      <stop offset="80%" stop-color="#bae6fd" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/>
+    <linearGradient id="northPoleCap" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1.0"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="85%" stop-color="#e0f7fa" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#80deea" stop-opacity="0.4"/>
     </linearGradient>
 
-    <!-- Dark Albedo Markings -->
-    <radialGradient id="albedoGrad" cx="40%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#5c150c" stop-opacity="0.75"/>
-      <stop offset="70%" stop-color="#420d06" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#2a0502" stop-opacity="0.95"/>
+    <!-- Warm Martian Albedo Features (Warm reddish-brown #BF360C, never black) -->
+    <radialGradient id="albedoWarm" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#bf360c" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#bf360c" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#d84315" stop-opacity="0.25"/>
     </radialGradient>
 
-    <!-- Planet Clip Path (r=215 at 256, 256) -->
-    <clipPath id="planetClip">
+    <!-- Planet Clip Path -->
+    <clipPath id="planetDiscClip">
       <circle cx="256" cy="256" r="215"/>
     </clipPath>
   </defs>
 
-  <!-- Deep space subtle atmospheric aura -->
-  <circle cx="256" cy="256" r="246" fill="url(#marsOuterGlow)"/>
+  <!-- Sunlit atmospheric aura -->
+  <circle cx="256" cy="256" r="248" fill="url(#marsOuterHalo)"/>
 
   <!-- Mars Planet Body -->
-  <g clip-path="url(#planetClip)">
-    <!-- Base Spherical Surface -->
-    <circle cx="256" cy="256" r="215" fill="url(#marsSphere)"/>
+  <g clip-path="url(#planetDiscClip)">
+    <!-- Base Daytime Spherical Surface (High saturation, no dark terminator) -->
+    <circle cx="256" cy="256" r="215" fill="url(#marsDaylight)"/>
 
-    <!-- Highland / Lowland Terra Cotta Swirls & Major Albedo Features -->
-    <!-- Syrtis Major shape -->
-    <path d="M 120 220 C 150 175, 210 195, 240 215 C 270 235, 290 265, 310 285 C 280 320, 230 330, 180 310 C 135 295, 110 250, 120 220 Z" fill="url(#albedoGrad)"/>
-    <!-- Acidalia Planitia dark region -->
-    <path d="M 290 150 C 330 135, 390 145, 420 175 C 410 205, 360 225, 320 205 C 285 190, 275 165, 290 150 Z" fill="url(#albedoGrad)" opacity="0.65"/>
-    <!-- Southern Mare Cimmerium / Tyrrhenum band -->
-    <path d="M 190 340 C 250 325, 320 345, 370 385 C 335 415, 255 425, 195 395 C 165 375, 165 350, 190 340 Z" fill="url(#albedoGrad)" opacity="0.75"/>
+    <!-- Subtle Albedo Markings (Warm reddish-brown #BF360C) -->
+    <!-- Syrtis Major -->
+    <path d="M 125 215 C 155 175, 215 190, 245 210 C 275 230, 295 260, 315 280 C 285 310, 235 320, 185 305 C 140 290, 115 245, 125 215 Z" fill="url(#albedoWarm)"/>
+    <!-- Acidalia Planitia -->
+    <path d="M 290 150 C 330 135, 385 145, 415 175 C 405 200, 360 220, 320 200 C 285 185, 275 165, 290 150 Z" fill="url(#albedoWarm)"/>
+    <!-- Southern Mare Highlands Band -->
+    <path d="M 175 345 C 245 325, 325 345, 375 385 C 335 415, 245 425, 180 395 C 150 375, 150 355, 175 345 Z" fill="url(#albedoWarm)"/>
 
     <!-- Prominent Valles Marineris Canyon Slash -->
-    <!-- Deep chasm trench cutting across equatorial Mars -->
-    <path d="M 165 254 Q 215 268 260 262 T 345 283 Q 395 294 418 308 Q 395 320 340 302 T 255 280 Q 210 284 165 266 Z" fill="#220403"/>
-    <!-- Canyon north rim sunlit crest highlight -->
-    <path d="M 166 253 Q 215 267 260 261 T 345 282 Q 395 293 418 307" stroke="#ffab91" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-    <!-- Branching chasmas (Coprates / Melas / Candor Chasmata) -->
-    <path d="M 235 265 Q 252 288 268 298" stroke="#220403" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-    <path d="M 308 276 Q 325 294 342 300" stroke="#220403" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- Deep chasm in warm reddish-brown #BF360C -->
+    <path d="M 155 254 Q 215 268 260 262 T 355 283 Q 405 294 425 308 Q 400 320 345 302 T 255 280 Q 205 284 155 266 Z" fill="#bf360c"/>
+    <!-- Canyon north rim sunlit crest highlight (#FFCCBC) -->
+    <path d="M 156 253 Q 215 267 260 261 T 355 282 Q 405 293 425 307" stroke="#ffccbc" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- Branching chasmas -->
+    <path d="M 235 265 Q 252 288 270 298" stroke="#bf360c" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <path d="M 315 276 Q 332 294 350 300" stroke="#bf360c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
 
-    <!-- Olympus Mons & Tharsis Montes Shield Calderas -->
-    <circle cx="160" cy="180" r="28" fill="#d84315" stroke="#ff8a65" stroke-width="2.5" opacity="0.9"/>
-    <ellipse cx="160" cy="180" rx="8" ry="6" fill="#3a0905" stroke="#ffab91" stroke-width="1.5"/>
+    <!-- Shield Caldera / Olympus Mons -->
+    <circle cx="160" cy="178" r="26" fill="#e64a19" stroke="#ffab91" stroke-width="2.5"/>
+    <ellipse cx="160" cy="178" rx="8" ry="6" fill="#bf360c" stroke="#ffccbc" stroke-width="1.5"/>
 
-    <!-- Major Impact Craters -->
-    <!-- Hellas Planitia Basin -->
-    <ellipse cx="345" cy="355" rx="38" ry="25" fill="#a82315" stroke="#ff8a65" stroke-width="2.5" opacity="0.75"/>
-    <ellipse cx="347" cy="357" rx="28" ry="18" fill="#470d06" opacity="0.7"/>
+    <!-- Impact Craters -->
+    <ellipse cx="345" cy="355" rx="34" ry="22" fill="#d84315" stroke="#ffab91" stroke-width="2.5"/>
+    <ellipse cx="347" cy="357" rx="22" ry="14" fill="#bf360c"/>
+    <circle cx="282" cy="176" r="14" fill="#d84315" stroke="#ffab91" stroke-width="1.8"/>
+    <circle cx="283" cy="177" r="8" fill="#bf360c"/>
 
-    <!-- Argyre Planitia Basin -->
-    <circle cx="138" cy="342" r="14" fill="#8c1b0f" stroke="#ff8a65" stroke-width="1.8" opacity="0.75"/>
-    <circle cx="139" cy="343" r="9" fill="#2d0603" opacity="0.75"/>
-
-    <!-- Schiaparelli / Equatorial Crater -->
-    <circle cx="282" cy="178" r="15" fill="#a82315" stroke="#ff8a65" stroke-width="1.8" opacity="0.8"/>
-    <circle cx="283" cy="179" r="10" fill="#3d0a06" opacity="0.75"/>
-
-    <!-- Smaller Crater Sprinkles -->
-    <circle cx="225" cy="135" r="7" fill="#581109" stroke="#ffab91" stroke-width="1.2" opacity="0.7"/>
-    <circle cx="378" cy="225" r="8" fill="#4a0f08" stroke="#ffab91" stroke-width="1.2" opacity="0.7"/>
-    <circle cx="300" cy="115" r="6" fill="#581109" stroke="#ffab91" stroke-width="1" opacity="0.65"/>
-
-    <!-- Northern Polar Ice Cap Accent (Brilliant Frosted White & Ice Blue) -->
-    <ellipse cx="256" cy="60" rx="76" ry="26" fill="url(#iceCapGrad)"/>
-    <ellipse cx="256" cy="52" rx="55" ry="16" fill="#ffffff" opacity="0.98"/>
-    <ellipse cx="250" cy="49" rx="35" ry="10" fill="#f0f9ff" opacity="0.95"/>
-    <!-- Subtle South Polar Ice Rim -->
-    <ellipse cx="256" cy="464" rx="44" ry="10" fill="#bae6fd" opacity="0.5"/>
-
-    <!-- 3D Planet Terminator Shading (Right edge night side) -->
-    <path d="M 256 41 C 374 41 471 138 471 256 C 471 374 374 471 256 471 C 345 425 395 345 395 256 C 395 167 345 87 256 41 Z" fill="#180402" opacity="0.5"/>
+    <!-- North Polar Ice Cap (Pure white with subtle cyan frost rim) -->
+    <!-- Cyan frost rim -->
+    <ellipse cx="256" cy="62" rx="82" ry="28" fill="#80deea" opacity="0.85"/>
+    <!-- Frosted ice transition -->
+    <ellipse cx="256" cy="58" rx="70" ry="24" fill="url(#northPoleCap)"/>
+    <!-- Pure brilliant white core -->
+    <ellipse cx="256" cy="52" rx="54" ry="16" fill="#ffffff"/>
+    <ellipse cx="250" cy="48" rx="34" ry="10" fill="#ffffff"/>
   </g>
 
-  <!-- Atmospheric Glow & Limb Ring (Vivid rim) -->
-  <circle cx="256" cy="256" r="215" fill="none" stroke="url(#marsLimb)" stroke-width="5" opacity="0.9"/>
-  <circle cx="256" cy="256" r="217" fill="none" stroke="#ffab91" stroke-width="1.5" opacity="0.6"/>
+  <!-- Sunlit Atmospheric Halo Rim (Amber/gold to glowing cyan edge) -->
+  <circle cx="256" cy="256" r="215" fill="none" stroke="url(#marsAtmosphereRim)" stroke-width="6.5"/>
+  <circle cx="256" cy="256" r="218" fill="none" stroke="#ffe082" stroke-width="1.5" opacity="0.6"/>
 </svg>
