@@ -2,6 +2,11 @@
 
 @layer base {
   :root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+
     --bg-space: #0c0e14;
     --bg-surface: #141824;
     --bg-card: #1b2132;
@@ -25,11 +30,14 @@
     --color-turmoil: #e67e22;
 
     --text-main: #f0f3f8;
-    --text-muted: #8c9bb3;
+    --text-muted: #a0aec0;
     --text-dark: #12151e;
   }
 
+  html,
   body {
+    touch-action: manipulation;
+    overscroll-behavior-y: contain;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-space);
     background-image: 
@@ -48,6 +56,19 @@
 
 .font-rajdhani {
   font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+/* Safe Area Utility Helpers */
+.safe-area-top {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+}
+
+.safe-area-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
+.safe-area-bottom-modal {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
 }
 
 /* Custom Scrollbar for game cards & modal lists */

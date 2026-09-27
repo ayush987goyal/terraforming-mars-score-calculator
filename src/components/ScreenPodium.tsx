@@ -8,9 +8,10 @@ import {
   Edit3,
   ChevronDown,
   ChevronUp,
-  Sparkles,
   Award
 } from 'lucide-react';
+import { triggerHaptic } from '../utils/haptics';
+import { PlayerBadge } from './PlayerBadge';
 
 interface ScreenPodiumProps {
   results: PlayerResult[];
@@ -39,7 +40,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
   const isCoWinners = tiedWinners.length > 1;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in zoom-in-95 duration-300">
+    <div className="max-w-3xl mx-auto space-y-6 pb-28 sm:pb-32 animate-in fade-in zoom-in-95 duration-300">
       {/* 1. Winner Spotlight Banner */}
       <div className="bg-gradient-to-r from-[#f39c12]/20 via-[#e2583e]/20 to-[#f39c12]/20 border-2 border-[#f39c12]/50 rounded-2xl p-5 sm:p-6 shadow-2xl relative overflow-hidden">
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#f1c40f]/20 rounded-full blur-3xl pointer-events-none" />
@@ -51,7 +52,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
             </div>
 
             <div>
-              <div className="text-[11px] uppercase tracking-widest font-extrabold text-[#f7dc6f] mb-0.5">
+              <div className="text-xs uppercase tracking-widest font-extrabold text-[#f7dc6f] mb-0.5">
                 {isCoWinners ? 'Co-Winners (Tie)' : 'Match Champion'}
               </div>
 
@@ -67,15 +68,12 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               ) : (
                 <div>
                   <div className="flex items-center gap-2">
-                    <span
-                      className="w-3.5 h-3.5 rounded-full border border-white/50"
-                      style={{ backgroundColor: winner.color }}
-                    />
+                    <PlayerBadge color={winner.color} size="sm" />
                     <h2 className="font-orbitron text-2xl sm:text-3xl font-black text-white tracking-wide">
                       {winner.name}
                     </h2>
                   </div>
-                  <p className="text-xs text-[#8c9bb3] mt-0.5">{winner.corporation}</p>
+                  <p className="text-xs text-slate-300 mt-0.5">{winner.corporation}</p>
 
                   {winner.tiebreakWon && second && (
                     <div className="inline-flex items-center gap-1.5 bg-[#f1c40f]/20 border border-[#f1c40f]/60 text-[#f7dc6f] text-xs font-bold px-2.5 py-1 rounded-full mt-2 shadow-sm animate-pulse">
@@ -94,7 +92,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
             <div className="font-orbitron text-5xl sm:text-6xl font-black text-[#f1c40f] drop-shadow-[0_0_20px_rgba(241,196,15,0.5)] leading-none">
               {winner.totalVP}
             </div>
-            <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8c9bb3] mt-1">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">
               Victory Points
             </div>
           </div>
@@ -107,7 +105,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
           <h3 className="font-orbitron text-lg font-bold text-white uppercase tracking-wider flex items-center justify-center gap-2">
             <span>🎖️</span> Official Post-Game Podium
           </h3>
-          <p className="text-xs text-[#8c9bb3] mt-0.5">
+          <p className="text-xs text-slate-300 mt-0.5">
             Final standings with cash tiebreaker resolution
           </p>
         </div>
@@ -120,12 +118,15 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               {/* Player Info Badge */}
               <div className="mb-2 w-full px-1">
                 <span className="text-2xl select-none">🥈</span>
-                <div className="font-bold text-xs sm:text-sm text-white truncate">{second.name}</div>
-                <div className="text-[10px] text-[#8c9bb3] truncate">{second.corporation}</div>
-                <div className="font-orbitron font-black text-slate-200 text-lg sm:text-xl mt-0.5">
-                  {second.totalVP} <span className="text-[10px] font-normal text-[#8c9bb3]">VP</span>
+                <div className="font-bold text-xs sm:text-sm text-white truncate flex items-center justify-center gap-1.5">
+                  <PlayerBadge color={second.color} size="xs" />
+                  <span>{second.name}</span>
                 </div>
-                <div className="text-[10px] font-semibold text-amber-400">
+                <div className="text-xs text-slate-300 truncate">{second.corporation}</div>
+                <div className="font-orbitron font-black text-slate-200 text-lg sm:text-xl mt-0.5">
+                  {second.totalVP} <span className="text-xs font-normal text-slate-400">VP</span>
+                </div>
+                <div className="text-xs font-semibold text-amber-400">
                   {second.megacredits} M€
                 </div>
               </div>
@@ -133,13 +134,13 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               {/* Pedestal */}
               <div className="w-full h-32 sm:h-36 rounded-t-xl bg-gradient-to-t from-slate-900 to-slate-700/80 border-t-2 border-x-2 border-slate-400/50 shadow-lg flex flex-col items-center justify-start pt-3 relative overflow-hidden">
                 <div
-                  className="w-full h-1.5 absolute top-0"
+                  className="w-full h-2 absolute top-0"
                   style={{ backgroundColor: second.color }}
                 />
                 <span className="font-orbitron text-2xl sm:text-3xl font-black text-slate-300">
                   2
                 </span>
-                <span className="text-[9px] uppercase font-bold tracking-widest text-slate-400 mt-1">
+                <span className="text-xs uppercase font-bold tracking-wider text-slate-300 mt-1">
                   Silver
                 </span>
               </div>
@@ -153,13 +154,14 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               <span className="text-3xl select-none drop-shadow-[0_0_10px_rgba(241,196,15,0.6)]">
                 👑
               </span>
-              <div className="font-bold text-sm sm:text-base text-white truncate flex items-center justify-center gap-1">
+              <div className="font-bold text-sm sm:text-base text-white truncate flex items-center justify-center gap-1.5">
+                <PlayerBadge color={winner.color} size="xs" />
                 <span>{winner.name}</span>
                 {winner.tiebreakWon && <span title="Won on tiebreaker">⭐</span>}
               </div>
-              <div className="text-[10px] text-[#8c9bb3] truncate">{winner.corporation}</div>
+              <div className="text-xs text-slate-300 truncate">{winner.corporation}</div>
               <div className="font-orbitron font-black text-[#f1c40f] text-2xl sm:text-3xl mt-0.5 drop-shadow-[0_0_10px_rgba(241,196,15,0.4)]">
-                {winner.totalVP} <span className="text-xs font-normal text-[#8c9bb3]">VP</span>
+                {winner.totalVP} <span className="text-xs font-normal text-slate-400">VP</span>
               </div>
               <div className="text-xs font-bold text-amber-400">
                 {winner.megacredits} M€ cash
@@ -169,13 +171,13 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
             {/* Pedestal */}
             <div className="w-full h-44 sm:h-48 rounded-t-xl bg-gradient-to-t from-amber-950/80 to-[#f39c12]/80 border-t-2 border-x-2 border-[#f1c40f] shadow-2xl shadow-[#f1c40f]/20 flex flex-col items-center justify-start pt-3 relative overflow-hidden ring-1 ring-[#f1c40f]/40">
               <div
-                className="w-full h-2 absolute top-0"
+                className="w-full h-2.5 absolute top-0"
                 style={{ backgroundColor: winner.color }}
               />
               <span className="font-orbitron text-3xl sm:text-4xl font-black text-white drop-shadow">
                 1
               </span>
-              <span className="text-[10px] uppercase font-extrabold tracking-widest text-amber-200 mt-1">
+              <span className="text-xs uppercase font-extrabold tracking-wider text-amber-200 mt-1">
                 Champion
               </span>
             </div>
@@ -187,12 +189,15 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               {/* Player Info Badge */}
               <div className="mb-2 w-full px-1">
                 <span className="text-2xl select-none">🥉</span>
-                <div className="font-bold text-xs sm:text-sm text-white truncate">{third.name}</div>
-                <div className="text-[10px] text-[#8c9bb3] truncate">{third.corporation}</div>
-                <div className="font-orbitron font-black text-amber-600 text-lg sm:text-xl mt-0.5">
-                  {third.totalVP} <span className="text-[10px] font-normal text-[#8c9bb3]">VP</span>
+                <div className="font-bold text-xs sm:text-sm text-white truncate flex items-center justify-center gap-1.5">
+                  <PlayerBadge color={third.color} size="xs" />
+                  <span>{third.name}</span>
                 </div>
-                <div className="text-[10px] font-semibold text-amber-400">
+                <div className="text-xs text-slate-300 truncate">{third.corporation}</div>
+                <div className="font-orbitron font-black text-amber-600 text-lg sm:text-xl mt-0.5">
+                  {third.totalVP} <span className="text-xs font-normal text-slate-400">VP</span>
+                </div>
+                <div className="text-xs font-semibold text-amber-400">
                   {third.megacredits} M€
                 </div>
               </div>
@@ -200,13 +205,13 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               {/* Pedestal */}
               <div className="w-full h-24 sm:h-28 rounded-t-xl bg-gradient-to-t from-stone-900 to-amber-950/70 border-t-2 border-x-2 border-amber-700/50 shadow-md flex flex-col items-center justify-start pt-2 relative overflow-hidden">
                 <div
-                  className="w-full h-1.5 absolute top-0"
+                  className="w-full h-2 absolute top-0"
                   style={{ backgroundColor: third.color }}
                 />
                 <span className="font-orbitron text-2xl sm:text-3xl font-black text-amber-500">
                   3
                 </span>
-                <span className="text-[9px] uppercase font-bold tracking-widest text-amber-600 mt-0.5">
+                <span className="text-xs uppercase font-bold tracking-wider text-amber-500 mt-0.5">
                   Bronze
                 </span>
               </div>
@@ -218,7 +223,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
         <div className="mt-6 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-[#232a3d] text-[11px] uppercase tracking-wider text-[#8c9bb3]">
+              <tr className="border-b border-[#232a3d] text-xs uppercase tracking-wider text-slate-300">
                 <th className="py-2.5 px-3 text-center w-12">Rank</th>
                 <th className="py-2.5 px-3">Player & Corporation</th>
                 <th className="py-2.5 px-3 text-center">Total VP</th>
@@ -246,7 +251,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
                             ? 'text-slate-300'
                             : r.rank === 3
                             ? 'text-amber-500'
-                            : 'text-[#8c9bb3]'
+                            : 'text-slate-400'
                         }
                       >
                         {medal}
@@ -254,10 +259,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
                     </td>
                     <td className="py-3 px-3">
                       <div className="flex items-center gap-2.5">
-                        <span
-                          className="w-3.5 h-3.5 rounded-full flex-shrink-0 border border-white/30"
-                          style={{ backgroundColor: r.color }}
-                        />
+                        <PlayerBadge color={r.color} size="sm" />
                         <div>
                           <div className="font-bold text-white flex items-center gap-1.5">
                             <span>{r.name}</span>
@@ -270,7 +272,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
                               </span>
                             )}
                           </div>
-                          <div className="text-xs text-[#8c9bb3]">{r.corporation}</div>
+                          <div className="text-xs text-slate-300">{r.corporation}</div>
                         </div>
                       </div>
                     </td>
@@ -293,8 +295,11 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
         <div className="mt-6 pt-4 border-t border-[#232a3d]">
           <button
             type="button"
-            onClick={() => setBreakdownOpen(!breakdownOpen)}
-            className="w-full flex items-center justify-between p-3.5 rounded-xl bg-[#1b2132] hover:bg-[#222a3e] border border-[#2b354d] text-white font-rajdhani text-sm font-bold uppercase tracking-wider transition cursor-pointer"
+            onClick={() => {
+              triggerHaptic(10);
+              setBreakdownOpen(!breakdownOpen);
+            }}
+            className="w-full min-h-[44px] flex items-center justify-between p-3.5 rounded-xl bg-[#1b2132] hover:bg-[#222a3e] border border-[#2b354d] text-white font-rajdhani text-sm font-bold uppercase tracking-wider transition cursor-pointer"
           >
             <span className="flex items-center gap-2">
               <Award className="w-4 h-4 text-sky-400" />
@@ -308,7 +313,7 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
               {/* Category Breakdown Matrix */}
               <div className="overflow-x-auto rounded-xl border border-[#2b354d]">
                 <table className="w-full text-xs text-left">
-                  <thead className="bg-[#1b2132] text-[#8c9bb3] uppercase font-bold border-b border-[#2b354d]">
+                  <thead className="bg-[#1b2132] text-slate-300 uppercase font-bold border-b border-[#2b354d]">
                     <tr>
                       <th className="py-2.5 px-3">Player</th>
                       <th className="py-2.5 px-2 text-center text-sky-400">TR</th>
@@ -326,11 +331,8 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
                   <tbody className="divide-y divide-[#1e2638] bg-[#141824]">
                     {results.map((r) => (
                       <tr key={r.id}>
-                        <td className="py-2.5 px-3 font-semibold text-white flex items-center gap-1.5">
-                          <span
-                            className="w-2.5 h-2.5 rounded-full"
-                            style={{ backgroundColor: r.color }}
-                          />
+                        <td className="py-2.5 px-3 font-semibold text-white flex items-center gap-2">
+                          <PlayerBadge color={r.color} size="xs" />
                           <span>{r.name}</span>
                         </td>
                         <td className="py-2.5 px-2 text-center font-bold text-sky-300">{r.tr}</td>
@@ -370,37 +372,49 @@ export const ScreenPodium: React.FC<ScreenPodiumProps> = ({
         </div>
       </div>
 
-      {/* 5. Action Buttons */}
-      <div className="flex flex-col sm:flex-row items-center gap-3">
-        <button
-          type="button"
-          onClick={onCopyReport}
-          className="w-full sm:flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white font-rajdhani text-sm sm:text-base font-bold uppercase tracking-wider shadow-lg shadow-sky-600/25 flex items-center justify-center gap-2 transition cursor-pointer"
-          title="Copy markdown report for Discord, Slack, or SMS"
-        >
-          <Copy className="w-4 h-4" />
-          <span>Copy Match Report</span>
-        </button>
+      {/* Sticky Bottom Action Bar with Safe Area Inset */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0c0e14]/95 backdrop-blur-md border-t border-[#2b354d] p-3 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-2xl">
+        <div className="max-w-3xl mx-auto flex items-center justify-between gap-2.5">
+          <button
+            type="button"
+            onClick={() => {
+              triggerHaptic(10);
+              onEditScores();
+            }}
+            className="min-h-[48px] px-4 py-3 rounded-xl bg-[#1b2132] hover:bg-[#252e46] active:scale-95 border border-[#2b354d] text-slate-200 font-rajdhani text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition cursor-pointer"
+            title="Return to walkthrough to tweak any values"
+          >
+            <Edit3 className="w-4 h-4 text-slate-400" />
+            <span className="hidden sm:inline">Edit Scores</span>
+            <span className="sm:hidden">Edit</span>
+          </button>
 
-        <button
-          type="button"
-          onClick={onEditScores}
-          className="w-full sm:w-auto py-3.5 px-5 rounded-xl bg-[#1b2132] hover:bg-[#252e46] border border-[#2b354d] text-slate-200 font-rajdhani text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition cursor-pointer"
-          title="Return to walkthrough to tweak any values"
-        >
-          <Edit3 className="w-4 h-4 text-slate-400" />
-          <span>Edit Scores</span>
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              triggerHaptic(10);
+              onCopyReport();
+            }}
+            className="flex-1 min-h-[48px] py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 active:scale-95 text-white font-rajdhani text-sm sm:text-base font-bold uppercase tracking-wider shadow-lg shadow-sky-600/25 flex items-center justify-center gap-2 transition cursor-pointer"
+            title="Copy markdown report for Discord, Slack, or SMS"
+          >
+            <Copy className="w-4 h-4" />
+            <span>Copy Match Report</span>
+          </button>
 
-        <button
-          type="button"
-          onClick={onNewGame}
-          className="w-full sm:w-auto py-3.5 px-5 rounded-xl bg-[#231515] hover:bg-red-950/70 border border-red-800/40 text-red-200 font-rajdhani text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition cursor-pointer"
-          title="Start a new game"
-        >
-          <RotateCcw className="w-4 h-4 text-red-400" />
-          <span>New Game</span>
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              triggerHaptic(10);
+              onNewGame();
+            }}
+            className="min-h-[48px] px-3.5 py-3 rounded-xl bg-[#231515] hover:bg-red-950/70 active:scale-95 border border-red-800/40 text-red-200 font-rajdhani text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition cursor-pointer"
+            title="Start a new game"
+          >
+            <RotateCcw className="w-4 h-4 text-red-400" />
+            <span className="hidden sm:inline">New Game</span>
+          </button>
+        </div>
       </div>
     </div>
   );

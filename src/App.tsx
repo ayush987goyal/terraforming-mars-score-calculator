@@ -69,6 +69,7 @@ export const App: React.FC = () => {
     max?: number;
     allowNegative?: boolean;
     onConfirm: (val: number) => void;
+    onConfirmAndNext?: (val: number) => void;
   }>({
     isOpen: false,
     title: '',
@@ -105,6 +106,11 @@ export const App: React.FC = () => {
       console.error('Failed to persist step:', e);
     }
   }, [walkthroughStep]);
+
+  // Auto Scroll-to-Top on Screen and Category Step Transitions
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentScreen, walkthroughStep]);
 
   // Capture PWA install prompt
   useEffect(() => {
@@ -348,6 +354,7 @@ export const App: React.FC = () => {
     max?: number;
     allowNegative?: boolean;
     onConfirm: (val: number) => void;
+    onConfirmAndNext?: (val: number) => void;
   }) => {
     setKeypadConfig({
       ...config,
@@ -360,7 +367,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-5 sm:py-7 min-h-screen">
+    <div className="max-w-5xl mx-auto px-4 pt-[max(0.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] min-h-screen">
       {/* Global App Header */}
       <Header
         currentScreen={currentScreen}
@@ -437,6 +444,7 @@ export const App: React.FC = () => {
         max={keypadConfig.max}
         allowNegative={keypadConfig.allowNegative}
         onConfirm={keypadConfig.onConfirm}
+        onConfirmAndNext={keypadConfig.onConfirmAndNext}
         onClose={handleCloseKeypad}
       />
 
